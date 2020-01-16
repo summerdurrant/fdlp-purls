@@ -1,6 +1,6 @@
 ---
 title: "fdlp-purls"
-output: html_notebook
+output: github_document 
 ---
 
 This notebook contains R code to analyze monthly PURL usage statistics from the Government Publishing Office (GPO). 
