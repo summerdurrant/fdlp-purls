@@ -1,0 +1,28 @@
+---
+title: ""
+output: html_notebook
+---
+
+```{r message = FALSE}
+# load packages
+library(tidyverse)
+library(lubridate)
+```
+
+```{r message = FALSE}
+# import and combine monthly usage files
+files <- dir(pattern = "*.csv")
+usage <- files %>%
+  map(read_csv) %>%
+  reduce(rbind)
+```
+
+```{r}
+# rename and coerce variables
+colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", "title", "author", "pub_year", "pattern")
+usage$timestamp <- ymd_hms(usage$timestamp)
+usage$pub_year <- as.integer(usage$pub_year)
+usage$host <- as.factor(usage$host)
+usage$pattern <- as.factor(usage$pattern)
+```
+
