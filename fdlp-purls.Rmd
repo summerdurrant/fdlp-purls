@@ -1,7 +1,9 @@
 ---
-title: ""
+title: "fdlp-purls"
 output: html_notebook
 ---
+
+This notebook contains R code to analyze monthly PURL usage statistics from the Government Publishing Office (GPO). 
 
 ```{r message = FALSE}
 # load packages
@@ -11,15 +13,16 @@ library(lubridate)
 
 ```{r message = FALSE}
 # import and combine monthly usage files
-files <- dir(pattern = "*.csv")
+files <- dir(pattern = "purl_referrals_0633")
 usage <- files %>%
   map(read_csv) %>%
   reduce(rbind)
 ```
 
 ```{r}
-# rename and coerce variables
-colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", "title", "author", "pub_year", "pattern")
+# rename and transform variables
+colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", 
+                     "title", "author", "pub_year", "pattern")
 usage$timestamp <- ymd_hms(usage$timestamp)
 usage$pub_year <- as.integer(usage$pub_year)
 usage$host <- as.factor(usage$host)
