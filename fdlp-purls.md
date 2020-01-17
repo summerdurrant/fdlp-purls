@@ -24,11 +24,6 @@ colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc",
                      "title", "author", "pub_year", "pattern")
 usage$timestamp <- ymd_hms(usage$timestamp)
 usage$pub_year <- as.integer(usage$pub_year)
-```
-
-    ## Warning: NAs introduced by coercion
-
-``` r
 usage$host <- as.factor(usage$host)
 usage$pattern <- as.factor(usage$pattern)
 ```

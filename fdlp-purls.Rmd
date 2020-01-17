@@ -19,7 +19,7 @@ usage <- files %>%
   reduce(rbind)
 ```
 
-```{r}
+```{r warning = FALSE}
 # rename and transform variables
 colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", 
                      "title", "author", "pub_year", "pattern")
