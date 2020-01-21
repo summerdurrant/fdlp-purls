@@ -3,8 +3,6 @@ title: "fdlp-purls"
 output: github_document
 ---
 
-This notebook contains R code to analyze monthly PURL usage statistics from the Government Publishing Office (GPO). 
-
 ```{r message = FALSE}
 # load packages
 library(tidyverse)
@@ -19,13 +17,39 @@ usage <- files %>%
   reduce(rbind)
 ```
 
-```{r}
-# rename and transform variables
+```{r warning = FALSE}
+# rename and convert variables
 colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", 
                      "title", "author", "pub_year", "pattern")
 usage$timestamp <- ymd_hms(usage$timestamp)
 usage$pub_year <- as.integer(usage$pub_year)
-usage$host <- as.factor(usage$host)
 usage$pattern <- as.factor(usage$pattern)
+```
+
+```{r}
+# calculate total usage
+total_usage <- nrow(usage)
+print(total_usage)
+```
+
+```{r}
+# calculate number of unique resources accessed
+unique_docs <- n_distinct(usage$purl)
+print(unique_docs)
+```
+
+```{r}
+# calculate usage by month
+monthly_usage <- usage %>%
+  group_by(month = month(timestamp, label = TRUE)) %>%
+  summarize(count = n())
+print(monthly_usage, n = 12)
+```
+
+```{r}
+monthly_usage %>%
+  ggplot(aes(x = month, y = count, group = 1)) +
+  geom_line() +
+  geom_point()
 ```
 
