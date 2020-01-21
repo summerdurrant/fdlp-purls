@@ -21,6 +21,7 @@ colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc",
                      "title", "author", "pub_year", "pattern")
 usage$timestamp <- ymd_hms(usage$timestamp)
 usage$pub_year <- as.integer(usage$pub_year)
+<<<<<<< HEAD
 usage$pattern <- as.factor(usage$pattern)
 ```
 
@@ -36,6 +37,10 @@ print(total_usage)
 # calculate number of unique resources accessed
 unique_docs <- n_distinct(usage$purl)
 print(unique_docs)
+=======
+usage$host <- as.factor(usage$host)
+usage$pattern <- as.factor(usage$pattern)
+>>>>>>> 94d761571660981cede5ac797864f6cc7bd69a5e
 ```
 
     ## [1] 690

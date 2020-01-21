@@ -18,7 +18,11 @@ usage <- files %>%
 ```
 
 ```{r warning = FALSE}
+<<<<<<< HEAD
 # rename and convert variables
+=======
+# rename and transform variables
+>>>>>>> 94d761571660981cede5ac797864f6cc7bd69a5e
 colnames(usage) <- c("timestamp", "host", "purl", "target", "sudoc", 
                      "title", "author", "pub_year", "pattern")
 usage$timestamp <- ymd_hms(usage$timestamp)
