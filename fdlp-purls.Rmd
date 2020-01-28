@@ -27,6 +27,12 @@ usage$pattern <- as.factor(usage$pattern)
 ```
 
 ```{r}
+usage <- usage %>%
+  distinct(timestamp, purl, .keep_all = TRUE)
+```
+
+
+```{r}
 # calculate total usage
 total_usage <- nrow(usage)
 print(total_usage)
